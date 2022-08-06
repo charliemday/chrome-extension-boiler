@@ -11,6 +11,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 var alias = {
   'react-dom': '@hot-loader/react-dom',
+  src: path.resolve(__dirname + '/src'),
 };
 
 // load the secrets
@@ -67,6 +68,9 @@ var options = {
             loader: 'css-loader',
           },
           {
+            loader: 'postcss-loader',
+          },
+          {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
@@ -104,6 +108,7 @@ var options = {
     ],
   },
   resolve: {
+    modules: ['node_modules', path.resolve(__dirname + '/src')],
     alias: alias,
     extensions: fileExtensions
       .map((extension) => '.' + extension)
@@ -160,12 +165,12 @@ var options = {
         },
       ],
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
-      filename: 'newtab.html',
-      chunks: ['newtab'],
-      cache: false,
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
+    //   filename: 'newtab.html',
+    //   chunks: ['newtab'],
+    //   cache: false,
+    // }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
       filename: 'options.html',
